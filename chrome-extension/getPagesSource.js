@@ -1,3 +1,4 @@
+var c = 0;
 // Extracts the email content from the webpage, else returns ""
 function extractEmail(document_root) {
   var el = document_root.getElementById("x_divtagdefaultwrapper");
@@ -35,17 +36,26 @@ function getIntent(data) {
 }
 
 function parseData(jsonData) {
-  var obj = JSON.parse(jsonData).result;
-  var content = obj.parameters.any;
-  var date = obj.parameters.date;
-  var service = obj.parameters.service;
+  if(c++ == 0) {
+    var obj = JSON.parse(jsonData).result;
+    var content = obj.parameters.any;
+    var date = obj.parameters.date;
+    var service = obj.parameters.service;
 
-  var str = "Title: " + content + "\nDate: " + date + "\nService: " + service;
+    var str = content + "\n" + date + "\n" + service;
 
-  chrome.runtime.sendMessage({
-      action: "getSource",
-      source: str
-  });
+    chrome.runtime.sendMessage({
+        action: "getSource",
+        source: str
+    });
+
+    var el = document.getElementById("x_divtagdefaultwrapper");
+    var all_ps = el.getElementsByTagName('p');
+
+    str = el.innerHTML;
+    var newData = str.replace(content, '<span class="highlight">' + content + '</span>');
+    el.innerHTML = newData;
+  }
 }
 
 // Displays edited content
