@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "funnel.ai",
+  "description": "Extension of funnel.ai",
+  "version": "0.1",
+
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [{
+    "css": ["styles.css"],
+    "matches": ["https://outlook.office.com/*"]
+  }],
+
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ]
+}
