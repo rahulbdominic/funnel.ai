@@ -44,7 +44,7 @@ function parseData(jsonData) {
   var date = obj.parameters.date;
   var service = obj.parameters.service;
 
-  var str = content + "\nDate: " + date + "\nService: " + service;
+  var str = "Title: " + content + "\nDate: " + date + "\nService: " + service;
 
   chrome.runtime.sendMessage({
       action: "getSource",
