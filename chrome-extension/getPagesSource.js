@@ -1,18 +1,14 @@
 // Extracts the email content from the webpage, else returns ""
 function extractEmail(document_root) {
   var el = document_root.getElementById("x_divtagdefaultwrapper");
-  var data = el.children[0].innerHTML.split('<br>');
-
-  // For testing purposes
-  // document_root.getElementById("x_divtagdefaultwrapper").innerHTML = "";
+  var all_ps = el.getElementsByTagName('p');
 
   var str = "";
-  if (data) {
-    for(var i = 0; i < data.length; i++) {
-      str += data[i];
-    }
-    console.log("Email Content: " + str);
+
+  for(var i = 0; i < all_ps.length; i++) {
+    str += all_ps[i].innerText;
   }
+
   getIntent(str);
   return str;
 }
